@@ -14,7 +14,10 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
   connectivity_plus: ^6.1.4
-
+  my_logging:
+    git:
+      url: git@github.com:marrbor/dart_libs_private.git
+      path: packages/util/my_logging/logging
 dev_dependencies:
   flutter_test:
     sdk: flutter
