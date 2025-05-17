@@ -1,0 +1,13 @@
+- WidgetsBindingObserver を使用するため、Notifier (または AsyncNotifier) を継承したクラスとして定義します。グローバルな状態であり、常にアクティブであってほしいため、keepAlive: true を指定します。
+- part 'providers.g.dart';: Riverpod Generatorが生成するコードを含むファイルを指定します。
+- @Riverpod(keepAlive: true): このアノテーションをクラスに付けることで、AppLifecycleObserverNotifier (自動生成されるプロバイダ名) が生成されます。
+  - keepAlive: true: プロバイダがリッスンされなくなっても状態を破棄せず、常にアクティブに保ちます。AppLifecycleState の監視には適しています。
+- class AppLifecycleObserver extends _$AppLifecycleObserver with WidgetsBindingObserver:
+  - 生成される _$AppLifecycleObserver を継承します。
+  - WidgetsBindingObserver をミックスインします。
+- build():
+  - プロバイダの初期状態を返します。WidgetsBinding.instance.lifecycleState で現在の状態を取得できますが、初期化タイミングによっては null の可能性があるため、フォールバックとして AppLifecycleState.resumed を設定しています。
+  - WidgetsBinding.instance.addObserver(this) でオブザーバーを登録します。
+  - ref.onDispose(): プロバイダが破棄される際に呼び出されるコールバックです。ここで WidgetsBinding.instance.removeObserver(this) を行い、クリーンアップします。
+- didChangeAppLifecycleState(AppLifecycleState state):
+  - ライフサイクルイベントが発生した際に呼び出され、this.state = state; でRiverpodの状態を更新します。
