@@ -6,12 +6,18 @@
 
 詳しくは `flutter create --help` で確認のこと。
 
+```shell
+$ (必要なら) mkdir [-p] 親ディレクトリ
+$ cd 親ディレクトリ
+$ flutter create --template=テンプレート種類 ライブラリ名
+```
 
+例えば，`(リポジトリルート)/packages/observers/network_observer` を作りたい時は以下を実行する。
 
 ```shell
-$ mkdir [-p] ターゲットディレクトリ
-$ cd ターゲットディレクトリ
-$ flutter create --template=テンプレート種類 ライブラリ名
+$ mkdir -p (リポジトリルート)/packages/observers
+$ cd (リポジトリルート)/packages/observers
+$ flutter create --template=package network_observer
 ```
 
 ## テンプレートの種類
